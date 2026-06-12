@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Officer(s) Records</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Badge Number</th>
+            <th>Rank</th>
+            <th>Place of Station</th>
+        </tr>
+        {% for officer in officers %}
+        <tr>
+            <td>{{ officer[0] }}</td>
+            <td>{{ officer[1] }}</td>
+            <td>{{ officer[2] }}</td>
+            <td>{{ officer[3] }}</td>
+            <td>{{ officer[4] }}</td>
+            <td>{{ officer[5] }}</td>
+            <td>{{ officer[6] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

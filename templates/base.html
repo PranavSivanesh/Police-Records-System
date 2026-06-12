@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Police Records System{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'styles.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class="nav-container">
+                <h1>Police Records System</h1>
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/criminals">Criminals</a>
+                    <a href="/officers">Officers</a>
+                </nav>
+            </div>
+        </header>
+        <div class="container">
+        {% block content %}
+        {% endblock %}
+        </div>
+        <footer>
+            <p>&copy; 2026 Pranav Sivanesh | <a href="https://github.com/PranavSivanesh/Police-Records-System" target="_blank">Github</a></p>
+        </footer>
+        <script>
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting){
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+            sections.forEach(section => observer.observe(section));
+        </script>
+    </body>
+</html>

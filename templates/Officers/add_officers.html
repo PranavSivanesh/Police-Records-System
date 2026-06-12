@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Type the following details!</h1>
+    <br>
+    <form method ="POST">
+        <label>Name:</label>
+        <input type="text" name = "name"><br><br>
+
+        <label>Age:</label>
+        <input type="number" name="age"><br><br>
+    
+        <label>Gender:</label>
+        <input type="text" name="gender"><br><br>
+
+        <label>Badge Number:</label>
+        <input type="text" name="badge"><br><br>
+
+        <label>Police Rank:</label>
+        <input type="text" name="rank"><br><br>
+
+        <label>Place of Station:</label>
+        <input type="text" name="station"><br><br>
+       
+        <input type="submit" value="Add Officer">
+    </form>
+{% endblock %}

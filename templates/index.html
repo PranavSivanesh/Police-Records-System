@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="section">
+    <h2>Criminal Records</h2>
+    <a href="/criminals">View Criminal Records</a>
+    <br>
+    <a href="/criminals/search">Search Criminal Records</a>
+    <br>
+    <a href="/criminals/add">Add Criminal Record</a>
+    <br>
+    <a href="/criminals/delete">Delete Criminal Record</a>
+    <br>
+    <a href="/criminals/update">Update Criminal Records</a>
+    <br>
+</div>
+
+<div class="section">
+    <h2>Officer Records</h2>
+    <a href="/officers">View Officers Records</a>
+    <br>
+    <a href="/officers/search">Search Officers Records</a>
+    <br>
+    <a href="/officers/add">Add an Officers Record</a>
+    <br>
+    <a href="/officers/delete">Delete an Officers Record</a>
+    <br>
+    <a href="/officers/update">Update Officers Records</a>
+</div>
+
+<div class="section">
+    <H1>GRAPHS</H1>
+    <a href="/graphs/crime_types">Most Common Crime Types</a>
+    <br>
+    <a href="/graphs/crime_rate">Crime Rate over the Years</a>
+    <br>
+    <a href="/graphs/crime_emirate">Crimes by Emirates</a>
+    <br>
+    <a href="/graphs/crime_women">Crimes against Women</a>
+    <br>
+    <a href="/graphs/crime_senior">Crimes against Senior Citizens</a>
+    <br>
+    <a href="/graphs/crime_age">Age Distribution of Criminals</a>
+</div>
+{% endblock %}
+        

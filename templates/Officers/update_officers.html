@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Update Officer Record(s)</h1>
+
+        <form method = "POST">
+            <label>Enter ID of Officer to edit changes:</label>
+            <input type="number" name = "ID">
+
+            <input type="submit" value="Find">
+        </form>
+
+        {% if officers %}
+        <form method="POST">
+            <input type="hidden" name="update_id" value="{{ officers[0] }}">
+            <input type="hidden" name="orig_name" value="{{ officers[1] }}">
+            <input type="hidden" name="orig_age" value="{{ officers[2] }}">
+            <input type="hidden" name="orig_gender" value="{{ officers[3] }}">
+            <input type="hidden" name="orig_badge" value="{{ officers[4] }}">
+            <input type="hidden" name="orig_rank" value="{{ officers[5] }}">
+            <input type="hidden" name="orig_station" value="{{ officers[6] }}">
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="{{ officers[1] }}"><br><br>
+
+            <label>Age:</label>
+            <input type="number" name="age" placeholder="{{ officers[2] }}"><br><br>
+
+            <label>Gender:</label>
+            <input type="text" name="gender" placeholder="{{ officers[3] }}"><br><br>
+
+            <label>Badge Number:</label>
+            <input type="text" name="badge" placeholder="{{ officers[4] }}"><br><br>
+
+            <label>Police Rank:</label>
+            <input type="text" name="rank" placeholder="{{ officers[5] }}"><br><br>
+
+            <label>Place of Station:</label>
+            <input type="text" name="station" placeholder="{{ officers[6] }}"><br><br>
+
+            <input type="submit" name="action" value="Update">
+        </form>
+        {% endif %}
+        
+        {% if updated %}
+        <h3>Record Updated Successfully!</h3>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>{{ updated[0] }}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ updated[1] }}</td>
+            </tr><tr>
+                <td>Age</td>
+                <td>{{ updated[2] }}</td>
+            </tr><tr>
+                <td>Gender</td>
+                <td>{{ updated[3] }}</td>
+            </tr><tr>
+                <td>Badge Number</td>
+                <td>{{ updated[4] }}</td>
+            </tr><tr>
+                <td>Police Rank</td>
+                <td>{{ updated[5] }}</td>
+            </tr>
+            <tr>
+                <td>Place of Station</td>
+                <td>{{ updated[6] }}</td>
+            </tr>
+        </table>
+        {% endif %}
+{% endblock %}

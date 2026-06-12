@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+        <h1> Update Criminal Record(s)</h1>
+
+        <form method = "POST">
+            <label>Enter ID of Convict to edit changes:</label>
+            <input type="number" name = "ID">
+
+            <input type="submit" value="Find">
+        </form>
+
+        {% if criminal %}
+        <form method="POST">
+            <input type="hidden" name="update_id" value="{{ criminal[0] }}">
+            <input type="hidden" name="orig_name" value="{{ criminal[1] }}">
+            <input type="hidden" name="orig_age" value="{{ criminal[2] }}">
+            <input type="hidden" name="orig_gender" value="{{ criminal[3] }}">
+            <input type="hidden" name="orig_crime" value="{{ criminal[4] }}">
+            <input type="hidden" name="orig_place" value="{{ criminal[5] }}">
+            <input type="hidden" name="orig_date" value="{{ criminal[6] }}">
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="{{ criminal[1] }}"><br><br>
+
+            <label>Age:</label>
+            <input type="number" name="age" placeholder="{{ criminal[2] }}"><br><br>
+
+            <label>Gender:</label>
+            <input type="text" name="gender" placeholder="{{ criminal[3] }}"><br><br>
+
+            <label>Crime Committed:</label>
+            <input type="text" name="crime" placeholder="{{ criminal[4] }}"><br><br>
+
+            <label>Place of Arrest:</label>
+            <input type="text" name="place" placeholder="{{ criminal[5] }}"><br><br>
+
+            <label>Date:</label>
+            <input type="text" name="date" placeholder="{{ criminal[6] }}"><br><br>
+
+            <input type="submit" name="action" value="Update">
+        </form>
+        {% endif %}
+        
+        {% if updated %}
+        <h3>Record Updated Successfully!</h3>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>{{ updated[0] }}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ updated[1] }}</td>
+            </tr><tr>
+                <td>Age</td>
+                <td>{{ updated[2] }}</td>
+            </tr><tr>
+                <td>Gender</td>
+                <td>{{ updated[3] }}</td>
+            </tr><tr>
+                <td>Crime Commited</td>
+                <td>{{ updated[4] }}</td>
+            </tr><tr>
+                <td>Place of Arrest</td>
+                <td>{{ updated[5] }}</td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>{{ updated[6] }}</td>
+            </tr>
+        </table>
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Criminal Records</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Crime Commited</th>
+            <th>Place of Arrest</th>
+            <th>Date</th>
+        </tr>
+        {% for criminal in criminals %}
+        <tr>
+            <td>{{ criminal[0] }}</td>
+            <td>{{ criminal[1] }}</td>
+            <td>{{ criminal[2] }}</td>
+            <td>{{ criminal[3] }}</td>
+            <td>{{ criminal[4] }}</td>
+            <td>{{ criminal[5] }}</td>
+            <td>{{ criminal[6] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
