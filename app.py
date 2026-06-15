@@ -187,10 +187,18 @@ def update_officers():
 
 @app.route("/graphs/<graph_type>")
 def show_graph(graph_type):
+    plt.style.use('dark_background')
+    plt.rcParams['figure.facecolor'] = '#14142b'
+    plt.rcParams['axes.facecolor'] = '#14142b'
+    plt.savefig("static/images/graph.png", facecolor = '#14142b')
+
     if graph_type == "crime_types":
         labels = ["Theft", "Assault", "Fraud", "Harassment", "Trafficking"]
         sizes = [35, 25, 20, 12, 8]
-        plt.pie(sizes, labels = labels, autopct='%1.1f%%')
+        plt.pie(sizes, labels = labels, autopct='%1.1f%%', textprops={'color' : 'white'})
+        for autotext in plt.gca().texts:
+            if '%' in autotext.get_text():
+                autotext.set_color('black')
         plt.title("Most Common Crime Types in UAE")
 
     elif graph_type == "crime_rate":
@@ -235,7 +243,17 @@ def show_graph(graph_type):
 
     plt.savefig("static/images/graph.png")
     plt.close()
-    return render_template("graph.html", graph_type = graph_type)
+
+    titles = {
+        "crime_types" : "Most Common Crime Types",
+        "crime_rate" : "Crime Rate Over the Years",
+        "crime_emirate": "Crimes by Emirate",
+        "crime_women": "Crimes Against Women",
+        "crime_senior": "Crimes Against Senior Citizens",
+        "crime_age": "Age Distribution of Criminals"      
+    }
+
+    return render_template("graph.html", graph_type = graph_type, title=titles[graph_type])
 
 
 if __name__ == "__main__":

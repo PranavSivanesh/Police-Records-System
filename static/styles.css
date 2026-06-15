@@ -6,14 +6,39 @@ body{
     padding: 0;
 }
 
+.home{
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    letter-spacing: 0;
+}
+
 header{
     background-color: #14142b;
     padding: 20px 40px;
+    margin: 0;
 }
 
-header h1{
-    color: #eaeaea;
-    margin: 0;
+.logo-title{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo{
+    background: linear-gradient(135deg, #00f5d4, #9b5de5);
+    color: #0d0d1a;
+    font-weight: 700;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 nav a{
@@ -152,4 +177,21 @@ footer{
 
 footer a{
     color: #64ffda;
+}
+
+.graph-container{
+    text-align: center;
+}
+
+.graph-container h2{
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.graph-container img{
+    max-width: 80%;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="section">
-    <h2>{{ graph_type }}</h2>
+<div class="section graph-container">
+    <h2>{{ title }}</h2>
     <img src="{{ url_for('static', filename='images/graph.png') }}">
 </div>
 {% endblock %}
