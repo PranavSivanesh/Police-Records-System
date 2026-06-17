@@ -13,6 +13,7 @@ def read_csv(filename):
         return [row for row in reader if len(row) > 0]
 
 def write_csv(filename, rows):
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "w") as file:
         writer = csv.writer(file)
         writer.writerows(rows)
@@ -27,16 +28,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    total_criminals = len(read_csv("data/criminal.csv"))
+    total_officers = len(read_csv("data/officer.csv"))
+    return render_template("index.html", total_officers=total_officers, total_criminals=total_criminals)
 
 @app.route("/<record_type>")
 def view_records(record_type):
     if record_type == "criminals":
-        filename = "Criminal.csv"
+        filename = "data/criminal.csv"
         template = "Criminals/criminals.html"
         key = "criminals"
     else:
-        filename = "Officer.csv"
+        filename = "data/officer.csv"
         template = "Officers/officers.html"
         key = "officers"
     
@@ -46,10 +49,10 @@ def view_records(record_type):
 @app.route("/<record_type>/delete", methods = ["GET", "POST"])
 def delete_record(record_type):
     if record_type == "criminals":
-        filename = "Criminal.csv"
+        filename = "data/criminal.csv"
         template = "Criminals/delete_criminal.html"
     else:
-        filename = "Officer.csv"
+        filename = "data/officer.csv"
         template = "Officers/delete_officer.html"
     
     if request.method == "POST":
@@ -63,10 +66,10 @@ def delete_record(record_type):
 @app.route("/<record_type>/search", methods = ["GET", "POST"])
 def search_record(record_type):
     if record_type == "criminals":
-        filename = "Criminal.csv"
+        filename = "data/criminal.csv"
         template = "Criminals/search_criminal.html"
     else:
-        filename = "Officer.csv"
+        filename = "data/officer.csv"
         template = "Officers/search_officers.html"
 
     results = []
@@ -81,16 +84,16 @@ def search_record(record_type):
 @app.route("/criminals/add", methods = ["GET", "POST"])
 def add_criminal():
     if request.method == "POST":
-        id = get_next_id("Criminal.csv")
+        id = get_next_id("data/criminal.csv")
         name = request.form["name"]
         age = request.form["age"]
         gender = request.form["gender"]
         crime = request.form["crime"]
         place = request.form["place"]
         date = request.form["date"]
-        rows = read_csv("Criminal.csv")
+        rows = read_csv("data/criminal.csv")
         rows.append([id,name,age,gender,crime,place,date])
-        write_csv("Criminal.csv", rows)
+        write_csv("data/criminal.csv", rows)
         return redirect(url_for("view_records", record_type = "criminals"))
     return render_template("Criminals/add_criminal.html")
 
@@ -101,7 +104,7 @@ def update_criminal():
     criminal = None
     if request.method == "POST" and "ID" in request.form:
         id = int(request.form["ID"])
-        rows = read_csv("Criminal.csv")
+        rows = read_csv("data/criminal.csv")
         for row in rows:
             if len(row)>0 and int(row[0]) == id:
                 criminal = row
@@ -116,7 +119,7 @@ def update_criminal():
         place = request.form["place"] or request.form["orig_place"]
         date = request.form["date"] or request.form["orig_date"]
 
-        rows = read_csv("Criminal.csv")
+        rows = read_csv("data/criminal.csv")
 
         for row in rows:
             if row[0] == id:
@@ -127,7 +130,7 @@ def update_criminal():
                 row[5] = place
                 row[6] = date
 
-        write_csv("Criminal.csv", rows)
+        write_csv("data/criminal.csv", rows)
 
         updated_row =[id, name, age, gender, crime, place, date]
     return render_template("Criminals/update_criminal.html", criminal=criminal, updated = updated_row)
@@ -135,16 +138,16 @@ def update_criminal():
 @app.route("/officers/add", methods = ["GET", "POST"])
 def add_officer():
     if request.method == "POST":
-        id = get_next_id("Officer.csv")
+        id = get_next_id("data/officer.csv")
         name = request.form["name"]
         age = request.form["age"]
         gender = request.form["gender"]
         badge = request.form["badge"]
         rank = request.form["rank"]
         station = request.form["station"]
-        rows = read_csv("Officer.csv")
+        rows = read_csv("data/officer.csv")
         rows.append([id, name, age, gender, badge, rank, station])
-        write_csv("Officer.csv", rows)
+        write_csv("data/officer.csv", rows)
         return redirect(url_for("view_records", record_type = "officers"))
     return render_template("Officers/add_officers.html")
 
@@ -154,7 +157,7 @@ def update_officers():
     officers = None
     if request.method == "POST" and "ID" in request.form:
         id = int(request.form["ID"])
-        rows = read_csv("Officer.csv")
+        rows = read_csv("data/officer.csv")
         for row in rows:
             if len(row)>0 and int(row[0]) == id:
                 officers = row
@@ -169,7 +172,7 @@ def update_officers():
         rank = request.form["rank"] or request.form["orig_rank"]
         station = request.form["station"] or request.form["orig_station"]
 
-        rows = read_csv("Officer.csv")
+        rows = read_csv("data/officer.csv")
 
         for row in rows:
             if row[0] == id:
@@ -180,7 +183,7 @@ def update_officers():
                 row[5] = rank
                 row[6] = station
 
-        write_csv("Officer.csv", rows)
+        write_csv("data/officer.csv", rows)
 
         updated_row =[id, name, age, gender, badge, rank, station]
     return render_template("Officers/update_officers.html", officers=officers, updated = updated_row)
@@ -234,7 +237,7 @@ def show_graph(graph_type):
         plt.ylabel("Number of Cases")
 
     elif graph_type == "crime_age":
-        rows = read_csv("Criminal.csv")
+        rows = read_csv("data/criminal.csv")
         ages = [int(row[2]) for row in rows]
         plt.hist(ages, bins=5)
         plt.title("Age Distribution of Criminals")

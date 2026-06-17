@@ -115,6 +115,20 @@ nav a{
     color: #64ffda;
 }
 
+.dashboard-layout{
+    display: flex;
+    gap: 20px;
+    min-height: calc(100vh - 80px);
+}
+
+.menu-col{
+    flex: 2;
+}
+
+.stats-col{
+    flex: 0.5;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
